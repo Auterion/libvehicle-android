@@ -1,29 +1,32 @@
 package com.auterion.tazama
 
+import com.auterion.tazama.libvehicle.Altitude
+import com.auterion.tazama.libvehicle.Distance
 import com.auterion.tazama.libvehicle.Measure.MeasurementSystem.IMPERIAL
 import com.auterion.tazama.libvehicle.Measure.MeasurementSystem.METRIC
+import com.auterion.tazama.libvehicle.Speed
 import org.junit.Assert.*
 import org.junit.Test
 
 class MeasureTest {
     @Test
     fun speed_defaultsToZero() {
-        assertEquals(0.0, com.auterion.tazama.libvehicle.Speed().value, 0.0)
+        assertEquals(0.0, Speed().value, 0.0)
     }
 
     @Test
     fun speed_isCorrect() {
-        assertEquals(24.0, com.auterion.tazama.libvehicle.Speed(24.0).value, 0.0)
+        assertEquals(24.0, Speed(24.0).value, 0.0)
     }
 
     @Test
     fun speed_defaultsToMetric() {
-        assertEquals(METRIC, com.auterion.tazama.libvehicle.Speed().measurementSystem)
+        assertEquals(METRIC, Speed().measurementSystem)
     }
 
     @Test
     fun speed_convertsToImperial() {
-        val speedMetric = com.auterion.tazama.libvehicle.Speed(42.24)
+        val speedMetric = Speed(42.24)
 
         val speedImperial = speedMetric.toImperial()
 
@@ -32,12 +35,12 @@ class MeasureTest {
 
     @Test
     fun speed_constructsAsImperial() {
-        assertEquals(IMPERIAL, com.auterion.tazama.libvehicle.Speed(measurementSystem = IMPERIAL).measurementSystem)
+        assertEquals(IMPERIAL, Speed(measurementSystem = IMPERIAL).measurementSystem)
     }
 
     @Test
     fun speed_convertsToMetric() {
-        val speedImperial = com.auterion.tazama.libvehicle.Speed(120.6, IMPERIAL)
+        val speedImperial = Speed(120.6, IMPERIAL)
 
         val speedMetric = speedImperial.toMetric()
 
@@ -46,7 +49,7 @@ class MeasureTest {
 
     @Test
     fun speed_convertsToImperialAndBack() {
-        val speedMetric = com.auterion.tazama.libvehicle.Speed(12.3)
+        val speedMetric = Speed(12.3)
 
         val speedImperial = speedMetric.toImperial()
         val speedMetricBack = speedImperial.toMetric()
@@ -56,25 +59,25 @@ class MeasureTest {
 
     @Test
     fun speed_unitIsCorrectInMetric() {
-        assertEquals("m/s", com.auterion.tazama.libvehicle.Speed().unit)
+        assertEquals("m/s", Speed().unit)
     }
 
     @Test
     fun speed_unitIsCorrectInImperial() {
-        assertEquals("ft/s", com.auterion.tazama.libvehicle.Speed(measurementSystem = IMPERIAL).unit)
+        assertEquals("ft/s", Speed(measurementSystem = IMPERIAL).unit)
     }
 
     @Test
     fun speed_equalsOperatorIsCorrect() {
-        val speedMetric1 = com.auterion.tazama.libvehicle.Speed(23.2)
-        val speedMetric2 = com.auterion.tazama.libvehicle.Speed(23.2)
-        val speedMetric3 = com.auterion.tazama.libvehicle.Speed(43.1)
+        val speedMetric1 = Speed(23.2)
+        val speedMetric2 = Speed(23.2)
+        val speedMetric3 = Speed(43.1)
         assertEquals(speedMetric1, speedMetric2)
         assertNotEquals(speedMetric1, speedMetric3)
 
-        val speedImperial1 = com.auterion.tazama.libvehicle.Speed(43.1, IMPERIAL)
-        val speedImperial2 = com.auterion.tazama.libvehicle.Speed(43.1, IMPERIAL)
-        val speedImperial3 = com.auterion.tazama.libvehicle.Speed(23.2, IMPERIAL)
+        val speedImperial1 = Speed(43.1, IMPERIAL)
+        val speedImperial2 = Speed(43.1, IMPERIAL)
+        val speedImperial3 = Speed(23.2, IMPERIAL)
         assertEquals(speedImperial1, speedImperial2)
         assertNotEquals(speedImperial1, speedImperial3)
 
@@ -84,15 +87,15 @@ class MeasureTest {
 
     @Test
     fun speed_hashcodeIsCorrect() {
-        val speedMetric1 = com.auterion.tazama.libvehicle.Speed(23.2)
-        val speedMetric2 = com.auterion.tazama.libvehicle.Speed(23.2)
-        val speedMetric3 = com.auterion.tazama.libvehicle.Speed(43.1)
+        val speedMetric1 = Speed(23.2)
+        val speedMetric2 = Speed(23.2)
+        val speedMetric3 = Speed(43.1)
         assertEquals(speedMetric1.hashCode(), speedMetric2.hashCode())
         assertNotEquals(speedMetric1.hashCode(), speedMetric3.hashCode())
 
-        val speedImperial1 = com.auterion.tazama.libvehicle.Speed(43.1, IMPERIAL)
-        val speedImperial2 = com.auterion.tazama.libvehicle.Speed(43.1, IMPERIAL)
-        val speedImperial3 = com.auterion.tazama.libvehicle.Speed(23.2, IMPERIAL)
+        val speedImperial1 = Speed(43.1, IMPERIAL)
+        val speedImperial2 = Speed(43.1, IMPERIAL)
+        val speedImperial3 = Speed(23.2, IMPERIAL)
         assertEquals(speedImperial1.hashCode(), speedImperial2.hashCode())
         assertNotEquals(speedImperial1.hashCode(), speedImperial3.hashCode())
 
@@ -102,22 +105,22 @@ class MeasureTest {
 
     @Test
     fun distance_defaultsToZero() {
-        assertEquals(0.0, com.auterion.tazama.libvehicle.Distance().value, 0.0)
+        assertEquals(0.0, Distance().value, 0.0)
     }
 
     @Test
     fun distance_isCorrect() {
-        assertEquals(24.0, com.auterion.tazama.libvehicle.Distance(24.0).value, 0.0)
+        assertEquals(24.0, Distance(24.0).value, 0.0)
     }
 
     @Test
     fun distance_defaultsToMetric() {
-        assertEquals(METRIC, com.auterion.tazama.libvehicle.Distance().measurementSystem)
+        assertEquals(METRIC, Distance().measurementSystem)
     }
 
     @Test
     fun distance_convertsToImperial() {
-        val distanceMetric = com.auterion.tazama.libvehicle.Distance(42.24)
+        val distanceMetric = Distance(42.24)
 
         val distanceImperial = distanceMetric.toImperial()
 
@@ -126,12 +129,12 @@ class MeasureTest {
 
     @Test
     fun distance_constructsAsImperial() {
-        assertEquals(IMPERIAL, com.auterion.tazama.libvehicle.Distance(measurementSystem = IMPERIAL).measurementSystem)
+        assertEquals(IMPERIAL, Distance(measurementSystem = IMPERIAL).measurementSystem)
     }
 
     @Test
     fun distance_convertsToMetric() {
-        val distanceImperial = com.auterion.tazama.libvehicle.Distance(120.6, IMPERIAL)
+        val distanceImperial = Distance(120.6, IMPERIAL)
 
         val distanceMetric = distanceImperial.toMetric()
 
@@ -140,7 +143,7 @@ class MeasureTest {
 
     @Test
     fun distance_convertsToImperialAndBack() {
-        val distanceMetric = com.auterion.tazama.libvehicle.Distance(12.3)
+        val distanceMetric = Distance(12.3)
 
         val distanceImperial = distanceMetric.toImperial()
         val distanceMetricBack = distanceImperial.toMetric()
@@ -150,55 +153,35 @@ class MeasureTest {
 
     @Test
     fun distance_unitIsCorrectInMetric() {
-        assertEquals("m", com.auterion.tazama.libvehicle.Distance().unit)
+        assertEquals("m", Distance().unit)
     }
 
     @Test
     fun distance_unitIsCorrectInImperial() {
-        assertEquals("ft", com.auterion.tazama.libvehicle.Distance(measurementSystem = IMPERIAL).unit)
+        assertEquals("ft", Distance(measurementSystem = IMPERIAL).unit)
     }
 
     @Test
     fun distance_compareToIsCorrect() {
-        assertTrue(
-            com.auterion.tazama.libvehicle.Distance(22.0) < com.auterion.tazama.libvehicle.Distance(
-                24.2
-            )
-        )
-        assertTrue(
-            com.auterion.tazama.libvehicle.Distance(12.0) > com.auterion.tazama.libvehicle.Distance(
-                3.8
-            )
-        )
-        assertTrue(
-            com.auterion.tazama.libvehicle.Distance(13.2) > com.auterion.tazama.libvehicle.Distance(
-                -42.8
-            )
-        )
+        assertTrue(Distance(22.0) < Distance(24.2))
+        assertTrue(Distance(12.0) > Distance(3.8))
+        assertTrue(Distance(13.2) > Distance(-42.8))
 
-        assertFalse(
-            com.auterion.tazama.libvehicle.Distance(0.0) < com.auterion.tazama.libvehicle.Distance(
-                0.0
-            )
-        )
-        assertFalse(
-            com.auterion.tazama.libvehicle.Distance(0.0) > com.auterion.tazama.libvehicle.Distance(
-                0.0
-            )
-        )
+        assertFalse(Distance(0.0) < Distance(0.0))
+        assertFalse(Distance(0.0) > Distance(0.0))
     }
 
     @Test
     fun distance_equalsOperatorIsCorrect() {
-        val distanceMetric1 = com.auterion.tazama.libvehicle.Distance(23.2)
-        val distanceMetric2 = com.auterion.tazama.libvehicle.Distance(23.2)
-        val distanceMetric3 = com.auterion.tazama.libvehicle.Distance(43.1)
+        val distanceMetric1 = Distance(23.2)
+        val distanceMetric2 = Distance(23.2)
+        val distanceMetric3 = Distance(43.1)
         assertEquals(distanceMetric1, distanceMetric2)
         assertNotEquals(distanceMetric1, distanceMetric3)
 
-        val distanceImperial1 = com.auterion.tazama.libvehicle.Distance(43.1, IMPERIAL)
-        val distanceImperial2 = com.auterion.tazama.libvehicle.Distance(43.1, IMPERIAL)
-        val distanceImperial3 = com.auterion.tazama.libvehicle.Distance(23.2, IMPERIAL)
+        val distanceImperial1 = Distance(43.1, IMPERIAL)
+        val distanceImperial2 = Distance(43.1, IMPERIAL)
+        val distanceImperial3 = Distance(23.2, IMPERIAL)
         assertEquals(distanceImperial1, distanceImperial2)
         assertNotEquals(distanceImperial1, distanceImperial3)
 
@@ -208,15 +191,15 @@ class MeasureTest {
 
     @Test
     fun distance_hashcodeIsCorrect() {
-        val distanceMetric1 = com.auterion.tazama.libvehicle.Distance(23.2)
-        val distanceMetric2 = com.auterion.tazama.libvehicle.Distance(23.2)
-        val distanceMetric3 = com.auterion.tazama.libvehicle.Distance(43.1)
+        val distanceMetric1 = Distance(23.2)
+        val distanceMetric2 = Distance(23.2)
+        val distanceMetric3 = Distance(43.1)
         assertEquals(distanceMetric1.hashCode(), distanceMetric2.hashCode())
         assertNotEquals(distanceMetric1.hashCode(), distanceMetric3.hashCode())
 
-        val distanceImperial1 = com.auterion.tazama.libvehicle.Distance(43.1, IMPERIAL)
-        val distanceImperial2 = com.auterion.tazama.libvehicle.Distance(43.1, IMPERIAL)
-        val distanceImperial3 = com.auterion.tazama.libvehicle.Distance(23.2, IMPERIAL)
+        val distanceImperial1 = Distance(43.1, IMPERIAL)
+        val distanceImperial2 = Distance(43.1, IMPERIAL)
+        val distanceImperial3 = Distance(23.2, IMPERIAL)
         assertEquals(distanceImperial1.hashCode(), distanceImperial2.hashCode())
         assertNotEquals(distanceImperial1.hashCode(), distanceImperial3.hashCode())
 
@@ -226,22 +209,22 @@ class MeasureTest {
 
     @Test
     fun altitude_defaultsToZero() {
-        assertEquals(0.0, com.auterion.tazama.libvehicle.Altitude().value, 0.0)
+        assertEquals(0.0, Altitude().value, 0.0)
     }
 
     @Test
     fun altitude_isCorrect() {
-        assertEquals(24.0, com.auterion.tazama.libvehicle.Altitude(24.0).value, 0.0)
+        assertEquals(24.0, Altitude(24.0).value, 0.0)
     }
 
     @Test
     fun altitude_defaultsToMetric() {
-        assertEquals(METRIC, com.auterion.tazama.libvehicle.Altitude().measurementSystem)
+        assertEquals(METRIC, Altitude().measurementSystem)
     }
 
     @Test
     fun altitude_convertsToImperial() {
-        val altitudeMetric = com.auterion.tazama.libvehicle.Altitude(42.24)
+        val altitudeMetric = Altitude(42.24)
 
         val altitudeImperial = altitudeMetric.toImperial()
 
@@ -250,13 +233,13 @@ class MeasureTest {
 
     @Test
     fun altitude_constructsAsImperial() {
-        assertEquals(IMPERIAL, com.auterion.tazama.libvehicle.Altitude(measurementSystem = IMPERIAL).measurementSystem)
+        assertEquals(IMPERIAL, Altitude(measurementSystem = IMPERIAL).measurementSystem)
     }
 
     @Test
     fun altitude_convertsToMetric() {
-        val altitudeImperial = com.auterion.tazama.libvehicle.Altitude(120.6, IMPERIAL)
-        val altitudeExpected = com.auterion.tazama.libvehicle.Altitude(36.759, METRIC)
+        val altitudeImperial = Altitude(120.6, IMPERIAL)
+        val altitudeExpected = Altitude(36.759, METRIC)
 
         val altitudeMetric = altitudeImperial.toMetric()
 
@@ -265,7 +248,7 @@ class MeasureTest {
 
     @Test
     fun altitude_convertsToImperialAndBack() {
-        val altitudeMetric = com.auterion.tazama.libvehicle.Altitude(12.3)
+        val altitudeMetric = Altitude(12.3)
 
         val altitudeImperial = altitudeMetric.toImperial()
         val altitudeMetricBack = altitudeImperial.toMetric()
@@ -275,25 +258,25 @@ class MeasureTest {
 
     @Test
     fun altitude_unitIsCorrectInMetric() {
-        assertEquals("m", com.auterion.tazama.libvehicle.Altitude().unit)
+        assertEquals("m", Altitude().unit)
     }
 
     @Test
     fun altitude_unitIsCorrectInImperial() {
-        assertEquals("ft", com.auterion.tazama.libvehicle.Altitude(measurementSystem = IMPERIAL).unit)
+        assertEquals("ft", Altitude(measurementSystem = IMPERIAL).unit)
     }
 
     @Test
     fun altitude_equalsOperatorIsCorrect() {
-        val altitudeMetric1 = com.auterion.tazama.libvehicle.Altitude(23.2)
-        val altitudeMetric2 = com.auterion.tazama.libvehicle.Altitude(23.2)
-        val altitudeMetric3 = com.auterion.tazama.libvehicle.Altitude(43.1)
+        val altitudeMetric1 = Altitude(23.2)
+        val altitudeMetric2 = Altitude(23.2)
+        val altitudeMetric3 = Altitude(43.1)
         assertEquals(altitudeMetric1, altitudeMetric2)
         assertNotEquals(altitudeMetric1, altitudeMetric3)
 
-        val altitudeImperial1 = com.auterion.tazama.libvehicle.Altitude(43.1, IMPERIAL)
-        val altitudeImperial2 = com.auterion.tazama.libvehicle.Altitude(43.1, IMPERIAL)
-        val altitudeImperial3 = com.auterion.tazama.libvehicle.Altitude(23.2, IMPERIAL)
+        val altitudeImperial1 = Altitude(43.1, IMPERIAL)
+        val altitudeImperial2 = Altitude(43.1, IMPERIAL)
+        val altitudeImperial3 = Altitude(23.2, IMPERIAL)
         assertEquals(altitudeImperial1, altitudeImperial2)
         assertNotEquals(altitudeImperial1, altitudeImperial3)
 
@@ -303,15 +286,15 @@ class MeasureTest {
 
     @Test
     fun altitude_hashcodeIsCorrect() {
-        val altitudeMetric1 = com.auterion.tazama.libvehicle.Altitude(23.2)
-        val altitudeMetric2 = com.auterion.tazama.libvehicle.Altitude(23.2)
-        val altitudeMetric3 = com.auterion.tazama.libvehicle.Altitude(43.1)
+        val altitudeMetric1 = Altitude(23.2)
+        val altitudeMetric2 = Altitude(23.2)
+        val altitudeMetric3 = Altitude(43.1)
         assertEquals(altitudeMetric1.hashCode(), altitudeMetric2.hashCode())
         assertNotEquals(altitudeMetric1.hashCode(), altitudeMetric3.hashCode())
 
-        val altitudeImperial1 = com.auterion.tazama.libvehicle.Altitude(43.1, IMPERIAL)
-        val altitudeImperial2 = com.auterion.tazama.libvehicle.Altitude(43.1, IMPERIAL)
-        val altitudeImperial3 = com.auterion.tazama.libvehicle.Altitude(23.2, IMPERIAL)
+        val altitudeImperial1 = Altitude(43.1, IMPERIAL)
+        val altitudeImperial2 = Altitude(43.1, IMPERIAL)
+        val altitudeImperial3 = Altitude(23.2, IMPERIAL)
         assertEquals(altitudeImperial1.hashCode(), altitudeImperial2.hashCode())
         assertNotEquals(altitudeImperial1.hashCode(), altitudeImperial3.hashCode())
 
@@ -321,9 +304,9 @@ class MeasureTest {
 
     @Test
     fun altitude_minusOperatorIsCorrect() {
-        val altitudeLeft = com.auterion.tazama.libvehicle.Altitude(40.2)
-        val altitudeRight = com.auterion.tazama.libvehicle.Altitude(18.4)
-        val altitudeExpected = com.auterion.tazama.libvehicle.Altitude(21.8)
+        val altitudeLeft = Altitude(40.2)
+        val altitudeRight = Altitude(18.4)
+        val altitudeExpected = Altitude(21.8)
 
         val altitudeDiff = altitudeLeft - altitudeRight
 
@@ -332,8 +315,8 @@ class MeasureTest {
 
     @Test
     fun altitude_minusThrowsIfMeasurementSystemDiffers() {
-        val altitudeLeft = com.auterion.tazama.libvehicle.Altitude(40.2)
-        val altitudeRight = com.auterion.tazama.libvehicle.Altitude(18.4, IMPERIAL)
+        val altitudeLeft = Altitude(40.2)
+        val altitudeRight = Altitude(18.4, IMPERIAL)
 
         assertThrows(RuntimeException::class.java) {
             altitudeLeft - altitudeRight

@@ -43,11 +43,7 @@ class DummyService(private val vehicleWriter: VehicleWriter) : VehicleService, C
 
         println("Emitting dummy velocity")
         vehicleWriter.telemetryWriter.velocityWriter.value =
-            VelocityNed(
-                Speed(1.0),
-                Speed(0.0),
-                Speed(0.0)
-            )
+            VelocityNed(Speed(1.0), Speed(0.0), Speed(0.0))
 
         delay(1000)
         emitVelocity()
@@ -58,8 +54,7 @@ class DummyService(private val vehicleWriter: VehicleWriter) : VehicleService, C
             return
         }
 
-        vehicleWriter.telemetryWriter.groundSpeedWriter.value =
-            Speed(1.0)
+        vehicleWriter.telemetryWriter.groundSpeedWriter.value = Speed(1.0)
         delay(1000)
         emitGroundSpeed()
     }
@@ -71,11 +66,7 @@ class DummyService(private val vehicleWriter: VehicleWriter) : VehicleService, C
 
         println("Emitting dummy attitude")
         vehicleWriter.telemetryWriter.attitudeWriter.value =
-            Euler(
-                Radian(0.0),
-                Radian(0.0),
-                Radian(0.0)
-            )
+            Euler(Radian(0.0), Radian(0.0), Radian(0.0))
 
         delay(1000)
         emitAttitude()

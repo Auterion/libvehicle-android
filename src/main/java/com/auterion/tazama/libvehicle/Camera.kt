@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.asStateFlow
 
 interface Camera {
     val videoStreamInfo: StateFlow<VideoStreamInfo?>
-
 }
 
 interface CameraWriter {

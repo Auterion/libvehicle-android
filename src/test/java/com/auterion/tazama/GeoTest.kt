@@ -17,16 +17,8 @@ class GeoTest {
 
     @Test
     fun distanceBetween_isCorrect() {
-        val pos1 = PositionAbsolute(
-            Degrees(),
-            Degrees(),
-            Altitude()
-        )
-        val pos2 = PositionAbsolute(
-            Degrees(1.0),
-            Degrees(),
-            Altitude()
-        )
+        val pos1 = PositionAbsolute(Degrees(), Degrees(), Altitude())
+        val pos2 = PositionAbsolute(Degrees(1.0), Degrees(), Altitude())
         val dist = GeoUtils.distanceBetween(pos1.lat, pos1.lon, pos2.lat, pos2.lon)
         assertEquals(111189.0, dist.value, 1.0)
     }
