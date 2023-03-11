@@ -1,5 +1,7 @@
 buildscript {
-    ext.kotlin_version = "1.7.10"
+    ext.kotlin_version = "1.8.10"
+    ext.hilt_version = '2.44'
+
     repositories {
         google()
         mavenCentral()
@@ -13,6 +15,7 @@ buildscript {
 allprojects {
     apply plugin: 'com.android.library'
     apply plugin: 'kotlin-android'
+    apply plugin: 'kotlin-kapt'
 
     repositories {
         google()
@@ -24,7 +27,7 @@ allprojects {
         buildToolsVersion "30.0.3"
 
         defaultConfig {
-            minSdkVersion 16
+            minSdkVersion 24
             targetSdkVersion 33
 
             group = 'com.auterion.tazama'
@@ -60,5 +63,11 @@ allprojects {
     dependencies {
         implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
         implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+
+        // MAVSDK-Java
+        implementation 'io.mavsdk:mavsdk:1.2.0'
+        implementation 'io.mavsdk:mavsdk-server:1.2.5'
+
+        testImplementation 'junit:junit:4.13.2'
     }
 }
