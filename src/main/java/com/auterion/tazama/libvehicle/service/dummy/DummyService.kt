@@ -1,8 +1,21 @@
 package com.auterion.tazama.libvehicle.service.dummy
 
-import com.auterion.tazama.libvehicle.*
+import com.auterion.tazama.libvehicle.Degrees
+import com.auterion.tazama.libvehicle.Euler
+import com.auterion.tazama.libvehicle.PositionAbsolute
+import com.auterion.tazama.libvehicle.Radian
+import com.auterion.tazama.libvehicle.Speed
+import com.auterion.tazama.libvehicle.VehicleWriter
+import com.auterion.tazama.libvehicle.VelocityNed
+import com.auterion.tazama.libvehicle.VideoStreamInfo
 import com.auterion.tazama.libvehicle.service.VehicleService
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 import java.util.concurrent.CopyOnWriteArrayList
 import kotlin.coroutines.CoroutineContext
 import kotlin.random.Random
